@@ -12,11 +12,10 @@ class HomeView(TemplateView):
              context = super().get_context_data(**kwargs)
              context['data'] = 'this is data for home page'
              return context
-    
        
 
-def site_header_component(request):
-    return render(request, 'shared/site_header_component.html')
+        def site_header_component(request):
+             return render(request, 'shared/site_header_component.html')
 
-def site_footer_component(request):
-    return render(request, 'shared/site_footer_component.html')
+        def site_footer_component(request):
+             return render(request, 'shared/site_footer_component.html')
