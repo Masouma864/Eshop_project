@@ -8,9 +8,9 @@ The eShop project is a web application designed to provide a user-friendly onlin
 ## Built With
 
 - html
-- css
+- CSS
 - Javascript
-- javascript
+- django
 
 ## Live Demo
 
@@ -31,10 +31,10 @@ git clone  https://github.com/Masouma864/Eshop_project.git
 ```
 3. To access cloned directory run:
 ```bash
-cd Todo-List-Project
+cd Eshop_project
 ```
 ### Install
-> To install linters and other project's dependencies run:
+> To install project's dependencies run:
 ```bash
 pip install -r requirements.txt
 ```
@@ -53,7 +53,7 @@ python manage.py runserver
 
 - GitHub: [@masouma864](https://github.com/Masouma864)
 - Twitter: [@hasina389](https://twitter.com/hasina389)
-- LinkedIn: [maosouma-m](https://www.linkedin.com/in/masouma-modarresi/)
+- LinkedIn [maosouma-m](https://www.linkedin.com/in/masouma-modarresi/)
 
 
 ## 🤝 Contributing
