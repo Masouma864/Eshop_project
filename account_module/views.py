@@ -6,6 +6,7 @@ from .models import User
 from django.utils.crypto import get_random_string
 from django.http import Http404, HttpRequest
 from django.contrib.auth import login, logout
+from utils.email_service import send_email
 
 from account_module.forms import RegisterForm, LoginForm, ForgotPasswordForm, ResetPasswordForm
 
@@ -36,6 +37,7 @@ class RegisterView(View):
                 new_user.set_password(user_password)
                 new_user.save()
                 # todo: send email active code
+                send_email('فعالسازی حساب کاربری', new_user.email, {'user': new_user}, 'emails/active_account.html')
                 return redirect(reverse('login_page'))
 
         context = {
@@ -124,5 +126,28 @@ class ResetPassword(View):
 
         reset_pass_form = ResetPasswordForm()
 
-        context = {'reset_pass_form': reset_pass_form}
+        context = {
+            'reset_pass_form': reset_pass_form,
+            'user': user
+        }
+        return render(request, 'account_module/reset_password.html', context)
+
+    def post(self, request: HttpRequest, active_code):
+        reset_pass_form = ResetPasswordForm(request.POST)
+        user: User = User.objects.filter(email_active_code__iexact=active_code).first()
+        if reset_pass_form.is_valid():
+            if user is None:
+                return redirect(reverse('login_page'))
+            user_new_pass = reset_pass_form.cleaned_data.get('password')
+            user.set_password(user_new_pass)
+            user.email_active_code = get_random_string(72)
+            user.is_active = True
+            user.save()
+            return redirect(reverse('login_page'))
+
+        context = {
+            'reset_pass_form': reset_pass_form,
+            'user': user
+        }
+
         return render(request, 'account_module/reset_password.html', context)
