@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django_extensions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # internal apps
@@ -41,6 +42,8 @@ INSTALLED_APPS = [
     'product_module',
     'contact_module',
     'site_module',
+    'article_module',
+    'sorl.thumbnail',
     # external apps
     'django_render_partial',
 ]
