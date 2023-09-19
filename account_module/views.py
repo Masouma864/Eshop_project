@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import get_user_model
 from django.urls import reverse
 from django.views import View
 from .models import User
@@ -36,8 +35,7 @@ class RegisterView(View):
                     username=user_email)
                 new_user.set_password(user_password)
                 new_user.save()
-                # todo: send email active code
-                send_email('فعالسازی حساب کاربری', new_user.email, {'user': new_user}, 'emails/active_account.html')
+                send_email('فعالسازی حساب کاربری', new_user.email, {'user': new_user}, 'emails/activate_account.html')
                 return redirect(reverse('login_page'))
 
         context = {
@@ -99,7 +97,7 @@ class LoginView(View):
         return render(request, 'account_module/login.html', context)
 
 
-class ForgetPassword(View):
+class ForgetPasswordView(View):
     def get(self, request: HttpRequest):
         forget_pass_form = ForgotPasswordForm()
         context = {'forget_pass_form': forget_pass_form}
@@ -111,14 +109,14 @@ class ForgetPassword(View):
             user_email = forget_pass_form.cleaned_data.get('email')
             user: User = User.objects.filter(email__iexact=user_email).first()
             if user is not None:
-                # send reset password email to user
-                pass
+                send_email('بازیابی کلمه عبور', user.email, {'user': user}, 'emails/forgot_password.html')
+                return redirect(reverse('home_page'))
 
         context = {'forget_pass_form': forget_pass_form}
         return render(request, 'account_module/forgot_password.html', context)
 
 
-class ResetPassword(View):
+class ResetPasswordView(View):
     def get(self, request: HttpRequest, active_code):
         user: User = User.objects.filter(email_active_code__iexact=active_code).first()
         if user is None:
@@ -151,3 +149,9 @@ class ResetPassword(View):
         }
 
         return render(request, 'account_module/reset_password.html', context)
+
+
+class LogoutView(View):
+    def get(self, request):
+        logout(request)
+        return redirect(reverse('login_page'))

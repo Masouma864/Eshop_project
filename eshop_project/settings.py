@@ -33,7 +33,6 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django_extensions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # internal apps
@@ -43,9 +42,11 @@ INSTALLED_APPS = [
     'contact_module',
     'site_module',
     'article_module',
-    'sorl.thumbnail',
+    'polls',
     # external apps
     'django_render_partial',
+    'sorl.thumbnail',
+    # 'jalali_date',
 ]
 
 MIDDLEWARE = [
@@ -146,3 +147,28 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'onionarchitecturemvc@gmail.com'
 EMAIL_HOST_PASSWORD = 'djangotoplearn@pass'
 EMAIL_PORT = 587
+
+# # default settings
+# JALALI_DATE_DEFAULTS = {
+#     'Strftime': {
+#         'date': '%y/%m/%d',
+#         'datetime': '%H:%M:%S _ %y/%m/%d',
+#     },
+#     'Static': {
+#         'js': [
+#             # loading datepicker
+#             'admin/js/django_jalali.min.js',
+#             # OR
+#             # 'admin/jquery.ui.datepicker.jalali/scripts/jquery.ui.core.js',
+#             # 'admin/jquery.ui.datepicker.jalali/scripts/calendar.js',
+#             # 'admin/jquery.ui.datepicker.jalali/scripts/jquery.ui.datepicker-cc.js',
+#             # 'admin/jquery.ui.datepicker.jalali/scripts/jquery.ui.datepicker-cc-fa.js',
+#             # 'admin/js/main.js',
+#         ],
+#         'css': {
+#             'all': [
+#                 'admin/jquery.ui.datepicker.jalali/themes/base/jquery-ui.min.css',
+#             ]
+#         }
+#     },
+# }
