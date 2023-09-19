@@ -1,4 +1,4 @@
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.views.generic import DetailView
 from django.views.generic.list import ListView
@@ -46,3 +46,8 @@ def article_categories_component(request: HttpRequest):
         'main_categories': article_main_categories
     }
     return render(request, 'article_module/components/article_categories_component.html', context)
+
+
+def add_article_comment(request: HttpRequest):
+    print(request.GET)
+    return HttpResponse('response')
