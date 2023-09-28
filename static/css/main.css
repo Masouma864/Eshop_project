@@ -2739,3 +2739,12 @@ h2.title {
 }
 
 
+.one-line-text {
+  text-align: right;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 270px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
